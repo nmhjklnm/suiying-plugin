@@ -12,7 +12,7 @@
   "plugins": [
     {
       "name": "suiying",
-      "source": ".",
+      "source": "./",
       "description": "Personal development toolkit with desktop notifications, code review agents, and design principles",
       "version": "0.1.0",
       "author": {
