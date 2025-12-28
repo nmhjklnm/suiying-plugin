@@ -10,7 +10,7 @@ My personal Claude Code plugin - a self-hosted collection of preferred configs, 
 Get macOS notifications when Claude Code needs your input or completes tasks:
 - Task completion notifications with duration tracking
 - Permission/approval prompts
-- Clickable notifications that jump back to VS Code
+- Clickable notifications that jump back to Windsurf IDE
 
 ### 🔍 Code Review Tools
 - `/suiying:code-review` - Comprehensive code review
@@ -47,9 +47,9 @@ The easiest way to install:
 
 That's it! The plugin will be automatically installed and ready to use.
 
-### Option 2: Direct Installation (Git)
+### Option 2: Local Development (Symlink)
 
-Clone and link the plugin:
+For local development and testing:
 
 ```bash
 # Clone the repository
@@ -57,15 +57,8 @@ git clone https://github.com/nmhjklnm/suiying-marketplace.git
 
 # Create symlink to Claude plugins directory
 ln -s "$(pwd)/suiying-marketplace" ~/.claude/plugins/suiying
-```
 
-### Option 3: Development Mode
-
-For testing or development:
-
-```bash
-cd /path/to/your/project
-claude --plugin-dir /path/to/suiying-plugin
+# Reload plugin in Claude Code after making changes
 ```
 
 ## Structure
@@ -73,14 +66,15 @@ claude --plugin-dir /path/to/suiying-plugin
 ```
 suiying-plugin/
 ├── .claude-plugin/
-│   └── plugin.json      # Plugin manifest
-├── commands/            # Custom slash commands
-├── skills/              # Auto-activating knowledge
-├── agents/              # Specialized subagents
-├── hooks/               # Event-driven automation
-│   └── hooks.json       # Desktop notification hooks
-└── scripts/             # Helper utilities
-    └── ccnotify.py      # Notification script
+│   ├── plugin.json          # Plugin metadata
+│   └── marketplace.json     # Marketplace config
+├── commands/                # Custom slash commands
+├── skills/                  # Auto-activating knowledge
+├── agents/                  # Specialized subagents
+├── hooks/                   # Event-driven automation
+│   └── hooks.json           # Desktop notification hooks
+└── scripts/                 # Helper utilities
+    └── ccnotify.py          # Notification script
 ```
 
 ## Usage
@@ -101,7 +95,7 @@ After installation, all commands, skills, and agents become available automatica
 Desktop notifications work automatically through hooks:
 - Get notified when Claude needs your input
 - Track task completion times
-- Click notifications to jump back to VS Code
+- Click notifications to jump back to Windsurf IDE
 
 ### Testing Notifications
 
