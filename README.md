@@ -2,6 +2,67 @@
 
 My personal Claude Code plugin - a self-hosted collection of preferred configs, workflows, and development practices.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Features
+
+### 🔔 Desktop Notifications (CCNotify Integration)
+Get macOS notifications when Claude Code needs your input or completes tasks:
+- Task completion notifications with duration tracking
+- Permission/approval prompts
+- Clickable notifications that jump back to VS Code
+
+### 🔍 Code Review Tools
+- `/suiying:code-review` - Comprehensive code review
+- `/suiying:design-review` - Architecture and design review
+- `/suiying:security-review` - Security-focused review
+
+### 🤖 Specialized Agents
+- **pragmatic-code-review** - Practical code review focusing on maintainability
+- **design-review** - Architecture and design analysis
+
+### 📚 Skills
+- **design-principles** - Software design best practices and patterns
+
+## Installation
+
+### Prerequisites
+- macOS only (for notifications)
+- `terminal-notifier` (for desktop notifications)
+  ```bash
+  brew install terminal-notifier
+  ```
+
+### Option 1: Install from Marketplace (Recommended)
+
+Coming soon! Once published to a marketplace, you'll be able to install with:
+
+```bash
+/plugin marketplace add <marketplace-url>
+/plugin install suiying
+```
+
+### Option 2: Direct Installation (Git)
+
+Clone and link the plugin:
+
+```bash
+# Clone the repository
+git clone https://github.com/nmhjklnm/suiying-plugin.git
+
+# Create symlink to Claude plugins directory
+ln -s "$(pwd)/suiying-plugin" ~/.claude/plugins/suiying
+```
+
+### Option 3: Development Mode
+
+For testing or development:
+
+```bash
+cd /path/to/your/project
+claude --plugin-dir /path/to/suiying-plugin
+```
+
 ## Structure
 
 ```
@@ -12,57 +73,53 @@ suiying-plugin/
 ├── skills/              # Auto-activating knowledge
 ├── agents/              # Specialized subagents
 ├── hooks/               # Event-driven automation
+│   └── hooks.json       # Desktop notification hooks
 └── scripts/             # Helper utilities
-```
-
-## Installation
-
-```bash
-# Option 1: Use directly with Claude Code
-claude --plugin-dir /path/to/suiying-plugin
-
-# Option 2: Symlink to global plugins
-ln -s /path/to/suiying-plugin ~/.claude/plugins/suiying
+    └── ccnotify.py      # Notification script
 ```
 
 ## Usage
 
-After installation, all commands, skills, and agents become available in Claude Code automatically.
+After installation, all commands, skills, and agents become available automatically.
 
-## Adding New Components
+### Available Commands
 
-### Add a Command
-Create `commands/your-command.md`:
-```markdown
----
-name: your-command
-description: What this command does
----
-
-Instructions for Claude...
+```bash
+# Code review commands
+/suiying:code-review [file-or-directory]
+/suiying:design-review [file-or-directory]
+/suiying:security-review [file-or-directory]
 ```
 
-### Add a Skill
-Create `skills/your-skill/SKILL.md`:
-```markdown
----
-name: Your Skill
-description: When to activate this skill
----
+### Desktop Notifications
 
-Knowledge and instructions...
+Desktop notifications work automatically through hooks:
+- Get notified when Claude needs your input
+- Track task completion times
+- Click notifications to jump back to VS Code
+
+### Testing Notifications
+
+To test if notifications are working:
+
+```bash
+# Start Claude Code
+claude
+
+# Run a quick test
+after 1 second, echo 'hello'
 ```
 
-### Add an Agent
-Create `agents/your-agent.md`:
-```markdown
----
-description: Agent's role
----
+You should see a macOS notification appear!
 
-Agent system prompt...
-```
+## Credits
+
+- **CCNotify Integration**: Based on [CCNotify](https://github.com/dazuiba/CCNotify) by dazuiba
+
+## Contributing
+
+This is a personal plugin, but feel free to fork and adapt for your own needs!
 
 ## License
 
-MIT
+MIT - see [LICENSE](LICENSE) file for details

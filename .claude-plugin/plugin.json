@@ -1,9 +1,16 @@
 {
   "name": "suiying",
   "version": "0.1.0",
-  "description": "Personal development toolkit - my preferred configs, workflows, and best practices",
+  "description": "Personal development toolkit with desktop notifications, code review agents, and design principles",
   "author": {
-    "name": "apple"
+    "name": "Yang YiHe",
+    "email": "108562510+nmhjklnm@users.noreply.github.com"
   },
-  "keywords": ["personal", "workflow", "config", "best-practices"]
+  "homepage": "https://github.com/nmhjklnm/suiying-plugin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nmhjklnm/suiying-plugin.git"
+  },
+  "license": "MIT",
+  "keywords": ["personal", "workflow", "notifications", "code-review", "best-practices"]
 }
