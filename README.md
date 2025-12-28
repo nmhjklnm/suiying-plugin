@@ -33,14 +33,19 @@ Get macOS notifications when Claude Code needs your input or completes tasks:
   brew install terminal-notifier
   ```
 
-### Option 1: Install from Marketplace (Recommended)
+### Option 1: Install via Marketplace (Recommended)
 
-Coming soon! Once published to a marketplace, you'll be able to install with:
+The easiest way to install:
 
 ```bash
-/plugin marketplace add <marketplace-url>
-/plugin install suiying
+# Add the marketplace
+/plugin marketplace add nmhjklnm/suiying-plugin
+
+# Install the plugin
+/plugin install suiying@suiying-market
 ```
+
+That's it! The plugin will be automatically installed and ready to use.
 
 ### Option 2: Direct Installation (Git)
 
