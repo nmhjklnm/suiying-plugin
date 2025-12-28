@@ -42,7 +42,7 @@ The easiest way to install:
 /plugin marketplace add nmhjklnm/suiying-plugin
 
 # Install the plugin
-/plugin install suiying@suiying-market
+/plugin install suiying@suiying-plugin
 ```
 
 That's it! The plugin will be automatically installed and ready to use.

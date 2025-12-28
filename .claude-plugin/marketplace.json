@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "suiying-market",
+  "name": "suiying-plugin",
   "owner": {
     "name": "Yang YiHe",
     "email": "108562510+nmhjklnm@users.noreply.github.com"
