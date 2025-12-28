@@ -98,7 +98,7 @@ class ClaudePromptTracker:
             )
             conn.commit()
 
-        logging.info(f"Recorded prompt for session {session_id}")
+        logging.info(f"Recorded prompt for session {session_id}: {prompt[:50]}")
 
     def handle_stop(self, data):
         """Handle Stop event - update completion time and send notification"""
@@ -108,7 +108,7 @@ class ClaudePromptTracker:
             # Find the latest unfinished record for this session
             cursor = conn.execute(
                 """
-                SELECT id, created_at, cwd
+                SELECT id, created_at, cwd, prompt
                 FROM prompt
                 WHERE session_id = ? AND stoped_at IS NULL
                 ORDER BY created_at DESC
@@ -119,7 +119,7 @@ class ClaudePromptTracker:
 
             row = cursor.fetchone()
             if row:
-                record_id, created_at, cwd = row
+                record_id, created_at, cwd, prompt = row
 
                 # Update completion time
                 conn.execute(
@@ -140,9 +140,14 @@ class ClaudePromptTracker:
                 seq = seq_row[0] if seq_row else 1
 
                 duration = self.calculate_duration_from_db(record_id)
+
+                # Format notification content: Project name + "完成了" + user prompt
+                project_name = os.path.basename(cwd) if cwd else "Claude"
+                prompt_preview = prompt[:60] + "..." if len(prompt) > 60 else prompt
+
                 self.send_notification(
-                    title=os.path.basename(cwd) if cwd else "Claude Task",
-                    subtitle=f"job#{seq} done, duration: {duration}",
+                    title=f"{project_name} - 完成了",
+                    subtitle=f"{prompt_preview} ({duration})",
                     cwd=cwd,
                 )
 
@@ -161,26 +166,32 @@ class ClaudePromptTracker:
 
         # Determine notification type and subtitle
         message_lower = message.lower()
-        subtitle = None
         should_update_db = False
         should_notify = True
+
+        # Format: Project name + action type + message content
+        project_name = os.path.basename(cwd) if cwd else "Claude"
 
         if (
             "waiting for your input" in message_lower
             or "waiting for input" in message_lower
         ):
-            subtitle = "Waiting for input"
+            title = f"{project_name} - 等待输入"
+            subtitle = message[:80] + "..." if len(message) > 80 else message
             should_update_db = True
             should_notify = (
                 False  # Suppress notification - Stop handler will send "job done"
             )
         elif "permission" in message_lower:
-            subtitle = "Permission Required"
+            title = f"{project_name} - 需要权限"
+            subtitle = message[:80] + "..." if len(message) > 80 else message
         elif "approval" in message_lower or "choose an option" in message_lower:
-            subtitle = "Action Required"
+            title = f"{project_name} - 需要操作"
+            subtitle = message[:80] + "..." if len(message) > 80 else message
         else:
             # For other notifications, use a generic subtitle
-            subtitle = "Notification"
+            title = f"{project_name} - 问询"
+            subtitle = message[:80] + "..." if len(message) > 80 else message
 
         # Update database for waiting notifications
         if should_update_db:
@@ -205,14 +216,14 @@ class ClaudePromptTracker:
         # Send notification only if should_notify is True
         if should_notify:
             self.send_notification(
-                title=os.path.basename(cwd) if cwd else "Claude Task",
+                title=title,
                 subtitle=subtitle,
                 cwd=cwd,
             )
-            logging.info(f"Notification sent for session {session_id}: {subtitle}")
+            logging.info(f"Notification sent for session {session_id}: {title}")
         else:
             logging.info(
-                f"Notification suppressed for session {session_id}: {subtitle}"
+                f"Notification suppressed for session {session_id}: {title}"
             )
 
     def calculate_duration_from_db(self, record_id):
@@ -287,7 +298,8 @@ class ClaudePromptTracker:
             ]
 
             if cwd:
-                cmd.extend(["-execute", f'/usr/local/bin/code "{cwd}"'])
+                # Open Windsurf instead of VS Code
+                cmd.extend(["-execute", f'/Users/apple/.codeium/windsurf/bin/windsurf "{cwd}"'])
 
             subprocess.run(cmd, check=False, capture_output=True)
             logging.info(f"Notification sent: {title} - {subtitle}")
@@ -331,7 +343,7 @@ def main():
     try:
         # Check if hook type is provided as command line argument
         if len(sys.argv) < 2:
-            print("ok")
+            print("[CCNotify] Ready")
             return
 
         expected_event_name = sys.argv[1]
