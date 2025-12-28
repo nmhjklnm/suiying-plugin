@@ -6,10 +6,10 @@
     "name": "Yang YiHe",
     "email": "108562510+nmhjklnm@users.noreply.github.com"
   },
-  "homepage": "https://github.com/nmhjklnm/suiying-plugin",
+  "homepage": "https://github.com/nmhjklnm/suiying-marketplace",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nmhjklnm/suiying-plugin.git"
+    "url": "https://github.com/nmhjklnm/suiying-marketplace.git"
   },
   "license": "MIT",
   "keywords": ["personal", "workflow", "notifications", "code-review", "best-practices"]

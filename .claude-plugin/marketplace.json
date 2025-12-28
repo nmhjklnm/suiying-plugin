@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "suiying-plugin",
+  "name": "suiying-marketplace",
   "owner": {
     "name": "Yang YiHe",
     "email": "108562510+nmhjklnm@users.noreply.github.com"
@@ -19,8 +19,8 @@
         "name": "Yang YiHe",
         "email": "108562510+nmhjklnm@users.noreply.github.com"
       },
-      "homepage": "https://github.com/nmhjklnm/suiying-plugin",
-      "repository": "https://github.com/nmhjklnm/suiying-plugin.git",
+      "homepage": "https://github.com/nmhjklnm/suiying-marketplace",
+      "repository": "https://github.com/nmhjklnm/suiying-marketplace.git",
       "license": "MIT",
       "keywords": ["personal", "workflow", "notifications", "code-review", "best-practices"],
       "category": "productivity"

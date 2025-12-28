@@ -39,10 +39,10 @@ The easiest way to install:
 
 ```bash
 # Add the marketplace
-/plugin marketplace add nmhjklnm/suiying-plugin
+/plugin marketplace add nmhjklnm/suiying-marketplace
 
 # Install the plugin
-/plugin install suiying@suiying-plugin
+/plugin install suiying@suiying-marketplace
 ```
 
 That's it! The plugin will be automatically installed and ready to use.
@@ -53,10 +53,10 @@ Clone and link the plugin:
 
 ```bash
 # Clone the repository
-git clone https://github.com/nmhjklnm/suiying-plugin.git
+git clone https://github.com/nmhjklnm/suiying-marketplace.git
 
 # Create symlink to Claude plugins directory
-ln -s "$(pwd)/suiying-plugin" ~/.claude/plugins/suiying
+ln -s "$(pwd)/suiying-marketplace" ~/.claude/plugins/suiying
 ```
 
 ### Option 3: Development Mode
